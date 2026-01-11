@@ -7,6 +7,23 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from .models import Payment
+from rest_framework import viewsets
+from .models import Booking
+from .serializers import BookingSerializer
+from .tasks import send_booking_confirmation_email
+
+
+class BookingViewSet(viewsets.ModelViewSet):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
+
+    def perform_create(self, serializer):
+        booking = serializer.save()
+        send_booking_confirmation_email.delay(
+            booking.user.email,
+            booking.id
+        )
+
 
 CHAPA_SECRET_KEY = os.getenv("CHAPA_SECRET_KEY")
 CHAPA_INIT_URL = "https://api.chapa.co/v1/transaction/initialize"
