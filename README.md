@@ -15,3 +15,18 @@ This project integrates the Chapa payment gateway to enable secure booking payme
 
 ### Testing
 Chapa sandbox environment was used to test payment initiation and verification.
+
+## Background Tasks with Celery
+
+This project uses Celery with RabbitMQ to handle background tasks.
+
+### How to Run
+1. Start RabbitMQ
+2. Run migrations:
+   python manage.py migrate
+3. Start Django server:
+   python manage.py runserver
+4. Start Celery worker:
+   celery -A alx_travel_app worker -l info
+
+Booking confirmation emails are sent asynchronously using Celery.
