@@ -4,3 +4,9 @@ CELERY_TASK_SERIALIZER = 'json'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'no-reply@alxtravel.com'
+
+DEBUG = False
+
+ALLOWED_HOSTS = [
+    "<your-username>.pythonanywhere.com"
+]
