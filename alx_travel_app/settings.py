@@ -14,6 +14,4 @@ CELERY_RESULT_BACKEND = 'django-db'
 
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    "<your-username>.pythonanywhere.com"
-]
+ALLOWED_HOSTS = ["*"]
